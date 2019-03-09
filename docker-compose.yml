@@ -1,0 +1,24 @@
+version: '2'
+services:
+  testapp:
+    build: ./testapp
+    ports:
+     - "8080:8080"
+    networks:
+     - backend-driver
+    links: 
+     - redis:redis.local
+  redis:
+    build: .
+    hostname: redis.local
+    ports:
+     - "6379:6379"
+    volumes:
+     - redis_data:/data
+    networks:
+     - backend-driver
+networks:
+  backend-driver:
+volumes:
+  redis_data:
+    
